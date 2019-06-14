@@ -1,0 +1,25 @@
+html, body, #root{
+  width: 100%;
+}
+
+.home-container{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+}
+
+.player-container{
+  flex-grow: 0.75;
+  height: 0px;
+  padding-top: 42.1875%;
+  position: relative;
+}
+
+.react-player{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.column{
+}
