@@ -5,5 +5,5 @@ npm install
 ```
 ## Usage
 ```
-npm run
+npm start
 ```
