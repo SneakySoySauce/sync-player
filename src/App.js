@@ -9,9 +9,11 @@ class App extends Component {
         this.state = {
             url: 'https://www.youtube.com/watch?v=Z-qzMfq47Ik',
             playing: true,
-            controls: false,
+            controls: true,
             volume: 0.7,
-            played: "1"
+            played: 0,
+            playIndex: 0,
+            playlist: ["https://www.youtube.com/watch?v=Z-qzMfq47Ik", "https://www.youtube.com/watch?v=gfLo-1Sjkr8"]
         };      
     }
 
@@ -21,10 +23,21 @@ class App extends Component {
     componentWillUnmount() {
     }
 
+    changeSong = () => {
+        if(this.state.playIndex === 0){
+            this.setState({playIndex: 1},
+                          () => this.load(this.state.playlist[this.state.playIndex]))
+            
+        } else {
+            this.setState({playIndex: 0},
+                          () => this.load(this.state.playlist[this.state.playIndex]))
+        }
+    }
+
     load = (url) => {
         this.setState({
             url,
-            played: parseFloat(0.2),
+            played: 0,
             loaded: 0
         })
     }
@@ -32,12 +45,14 @@ class App extends Component {
     ref = player => {
         this.player = player
     }
+
     goToMiddle = () => {
         this.setState({
             played: parseFloat(0.5)
         })
         this.player.seekTo(parseFloat(0.5))
     }
+
     render(){
         return (
             <div className="home-container">
@@ -55,7 +70,7 @@ class App extends Component {
                     />
                 </div>
                 <div className="column">hahaha
-                    <input value="Change url" type="button" onClick={() => this.load("https://www.youtube.com/watch?v=szkOJVHYwSM")}/>
+                    <input value="Change url" type="button" onClick={() => this.changeSong()}/>
                     <input value="Go to middle" type="button" onClick={() => this.goToMiddle()}/>
                 </div>
             </div>
